@@ -133,7 +133,7 @@ assets=$(echo "$srmd_ncnn_vulkan_latest_release" | jq -r '.assets | length')
 
 # iterate through each of the assets and see if the name of the asset matches what we're looking for
 for i in $(seq $assets $END); do
-    if echo "$srmd_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].name" | egrep "^srmd-ncnn-vulkan-[0-9]*-linux\.zip$"; then
+    if echo "$srmd_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].name" | egrep "^srmd-ncnn-vulkan-[0-9]*-ubuntu\.zip$"; then
         download_link=$(echo "$srmd_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].browser_download_url")
         break
     fi
@@ -146,7 +146,7 @@ if [ -z "$download_link" ]; then
     exit 1
 fi
 
-srmd_ncnn_vulkan_zip="$TEMP/srmd-ncnn-vulkan-linux.zip"
+srmd_ncnn_vulkan_zip="$TEMP/srmd-ncnn-vulkan-ubuntu.zip"
 echo "Downloading $download_link to $srmd_ncnn_vulkan_zip"
 aria2c "$download_link" --dir / -o "$srmd_ncnn_vulkan_zip"
 unzip "$srmd_ncnn_vulkan_zip" -d $TEMP/srmd-ncnn-vulkan
@@ -165,7 +165,7 @@ assets=$(echo "$realsr_ncnn_vulkan_latest_release" | jq -r '.assets | length')
 
 # iterate through each of the assets and see if the name of the asset matches what we're looking for
 for i in $(seq $assets $END); do
-    if echo "$realsr_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].name" | egrep "^realsr-ncnn-vulkan-[0-9]*-linux\.zip$"; then
+    if echo "$realsr_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].name" | egrep "^realsr-ncnn-vulkan-[0-9]*-ubuntu\.zip$"; then
         download_link=$(echo "$realsr_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].browser_download_url")
         break
     fi
@@ -178,11 +178,11 @@ if [ -z "$download_link" ]; then
     exit 1
 fi
 
-realsr_ncnn_vulkan_zip="$TEMP/realsr-ncnn-vulkan-linux.zip"
+realsr_ncnn_vulkan_zip="$TEMP/realsr-ncnn-vulkan-ubuntu.zip"
 echo "Downloading $download_link to $realsr_ncnn_vulkan_zip"
 aria2c "$download_link" --dir / -o "$realsr_ncnn_vulkan_zip"
 unzip "$realsr_ncnn_vulkan_zip" -d $TEMP/realsr-ncnn-vulkan
-mv -v $TEMP/realsr-ncnn-vulkan/realsr-ncnn-vulkan-*-linux $INSTALLATION_PATH/video2x/src/dependencies/realsr-ncnn-vulkan
+mv -v $TEMP/realsr-ncnn-vulkan/realsr-ncnn-vulkan-*-ubuntu $INSTALLATION_PATH/video2x/src/dependencies/realsr-ncnn-vulkan
 
 # install Anime4KCPP
 # install the latest cmake for compiling Anime4KCPP
