@@ -101,7 +101,7 @@ assets=$(echo "$waifu2x_ncnn_vulkan_latest_release" | jq -r '.assets | length')
 
 # iterate through each of the assets and see if the name of the asset matches what we're looking for
 for i in $(seq $assets $END); do
-    if echo "$waifu2x_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].name" | egrep "^waifu2x-ncnn-vulkan-[0-9]*-linux\.zip$"; then
+    if echo "$waifu2x_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].name" | egrep "^waifu2x-ncnn-vulkan-[0-9]*-ubuntu\.zip$"; then
         download_link=$(echo "$waifu2x_ncnn_vulkan_latest_release" | jq -r ".assets["$(($i - 1))"].browser_download_url")
         break
     fi
@@ -114,11 +114,11 @@ if [ -z "$download_link" ]; then
     exit 1
 fi
 
-waifu2x_ncnn_vulkan_zip="$TEMP/waifu2x-ncnn-vulkan-linux.zip"
+waifu2x_ncnn_vulkan_zip="$TEMP/waifu2x-ncnn-vulkan-ubuntu.zip"
 echo "Downloading $download_link to $waifu2x_ncnn_vulkan_zip"
 aria2c "$download_link" --dir / -o "$waifu2x_ncnn_vulkan_zip"
 unzip "$waifu2x_ncnn_vulkan_zip" -d $TEMP/waifu2x-ncnn-vulkan
-mv -v $TEMP/waifu2x-ncnn-vulkan/waifu2x-ncnn-vulkan-*-linux $INSTALLATION_PATH/video2x/src/dependencies/waifu2x-ncnn-vulkan
+mv -v $TEMP/waifu2x-ncnn-vulkan/waifu2x-ncnn-vulkan-*-ubuntu $INSTALLATION_PATH/video2x/src/dependencies/waifu2x-ncnn-vulkan
 
 # install srmd-ncnn-vulkan
 # download libvulkan1
