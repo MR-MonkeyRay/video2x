@@ -150,7 +150,7 @@ srmd_ncnn_vulkan_zip="$TEMP/srmd-ncnn-vulkan-linux.zip"
 echo "Downloading $download_link to $srmd_ncnn_vulkan_zip"
 aria2c "$download_link" --dir / -o "$srmd_ncnn_vulkan_zip"
 unzip "$srmd_ncnn_vulkan_zip" -d $TEMP/srmd-ncnn-vulkan
-mv -v $TEMP/srmd-ncnn-vulkan/srmd-ncnn-vulkan-*-linux $INSTALLATION_PATH/video2x/src/dependencies/srmd-ncnn-vulkan
+mv -v $TEMP/srmd-ncnn-vulkan/srmd-ncnn-vulkan-*-ubuntu $INSTALLATION_PATH/video2x/src/dependencies/srmd-ncnn-vulkan
 
 # install realsr-ncnn-vulkan
 # download libvulkan1
