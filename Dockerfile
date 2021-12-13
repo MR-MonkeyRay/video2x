@@ -18,17 +18,17 @@ LABEL maintainer="Danielle Douglas <ddouglas87@gmail.com>"
 LABEL maintainer="Lhanjian <lhjay1@foxmail.com>"
 LABEL maintainer="K4YT3X <k4yt3x@k4yt3x.com>"
 
-RUN sed -i 's/archive.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
-RUN sed -i 's/security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+ENV NVIDIA_DRIVER_CAPABILITIES=all \
+    DEBIAN_FRONTEND=teletype
 
 # run installation
-RUN apt-get update \
-    && apt-get install -y git-core \
-    && git clone --recurse-submodules --progress https://github.com/k4yt3x/video2x.git /tmp/video2x/video2x \
-    && bash -e /tmp/video2x/video2x/src/video2x_setup_ubuntu.sh /
+RUN sed -i 's/archive.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list \
+&&  sed -i 's/security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list \
+&&  apt-get update \
+&&  apt-get install -y git-core \
+&&  git clone --recurse-submodules --progress https://github.com/k4yt3x/video2x.git /tmp/video2x/video2x \
+&&  bash -e /tmp/video2x/video2x/src/video2x_setup_ubuntu.sh / \
+&&  apt-get clean
 
 WORKDIR /host
 ENTRYPOINT ["python3.8", "/video2x/src/video2x.py"]
-
-ENV NVIDIA_DRIVER_CAPABILITIES all
-ENV DEBIAN_FRONTEND teletype
